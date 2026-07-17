@@ -10,7 +10,7 @@ library(readr)
 setwd("/Volumes/data/projects/switch/gorilla_csv/raw_csv")
 
 #2. Load data
-df <- read_csv("switch_a_211.csv", show_col_types = FALSE)
+df <- read_csv("switch_064.csv", show_col_types = FALSE)
 
 #3. Define target screens
 target_screens <- c("baseline_test_choice", 
@@ -83,4 +83,4 @@ result_final <- result_final |>
   ) |>
   select(-cueType_filled, -participant)   # drop the helper column
 
-write.csv(result_final, "/Volumes/data/projects/switch/gorilla_csv/clean_csv_with_audio/switch_a_211_clean_w_audio.csv", row.names = FALSE)
+write.csv(result_final, "/Volumes/data/projects/switch/gorilla_csv/clean_csv_with_audio/switch_064_clean_w_audio.csv", row.names = FALSE)

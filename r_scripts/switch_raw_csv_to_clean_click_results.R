@@ -9,7 +9,7 @@ setwd("/Volumes/data/projects/switch/gorilla_csv/raw_csv")
 
 #2. Read Gorilla csv and only keep columns needed
                    ## change participant ID ##
-raw_csv <- read.csv("switch_a_211.csv")
+raw_csv <- read.csv("switch_064.csv")
 raw_csv <- raw_csv %>% select(Participant.Public.ID,Trial.Number,
                               Screen,Response.Type,Response,Spreadsheet..test_audio,
                               Spreadsheet..top_right_image,Spreadsheet..top_left_image,
@@ -62,7 +62,7 @@ raw_csv <- raw_csv %>%
 
 #7. Read and merge target csv with the raw_csv
                        ## change answer spreadsheet based on the participant's spreadsheet
-target_csv <- read.csv("with_point_to_knock_on_w_target.csv")
+target_csv <- read.csv("with_pat_point_to_w_target.csv")
 target_csv <- target_csv %>% select(test_audio, target_animal, target_instrument, verb, cueType)
 target_csv <- target_csv[rowSums(is.na(target_csv) | target_csv == "") == 0, ]
 
@@ -71,15 +71,16 @@ raw_csv <- raw_csv %>%
     target_csv,
     by = "test_audio"
   )
-raw_csv$age <- 18.803 ## change this for each participant
+raw_csv$age <- 9.869 ## change this for each participant
 
 #8. Reorder the columns 
 clean_csv <- raw_csv[, c("participant_ID","age","phase","trial_number","test_audio","verb","cueType",
                          "top_right_image","top_left_image","bottom_left_image","bottom_right_image",
                          "target_animal","target_instrument","click")]
 clean_csv <- clean_csv[, -5] #removing test audio; was needed to compare with target csv
-#for children
-#clean_csv$participant_ID <- sprintf("switch_%03d", clean_csv$participant_ID)
+
+#for child data clicking (comment this line below for adults)
+clean_csv$participant_ID <- sprintf("switch_%03d", clean_csv$participant_ID)
 
 #9. Assign click to TA (target animal) / TI (target instrument) / DA (distractor animal) / DI (distractor instrument)
 clean_csv$clickToTA <- as.integer(clean_csv$click == clean_csv$target_animal)
@@ -90,5 +91,5 @@ clean_csv$clickToDI <- as.integer(!grepl("_", clean_csv$click) & clean_csv$click
 
 #10. Save it to new path with new name
                                                                           ## rename the ID
-write.csv(clean_csv, "/Volumes/data/projects/switch/gorilla_csv/clean_csv_for_click_analysis/switch_a_211_clean_with_click.csv", row.names = FALSE)
+write.csv(clean_csv, "/Volumes/data/projects/switch/gorilla_csv/clean_csv_for_click_analysis/switch_064_clean_with_click.csv", row.names = FALSE)
 

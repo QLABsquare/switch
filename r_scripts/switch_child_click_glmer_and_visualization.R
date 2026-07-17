@@ -13,7 +13,7 @@ older_ids <- c(
   "switch_022","switch_029","switch_031","switch_026","switch_042","switch_025","switch_028",
   "switch_030","switch_033","switch_046","switch_044","switch_037","switch_040","switch_034",
   "switch_038","switch_047","switch_050","switch_051","switch_049","switch_052", "switch_053",
-  "switch_041","switch_054","switch_048","switch_055","switch_061","switch_062"
+  "switch_041","switch_054","switch_048","switch_055","switch_061","switch_062", "switch_064"
 )
 
 # Path and file list
@@ -31,7 +31,7 @@ older_csv <- older_csv %>%
   rename(testing_time_point = phase)
 
 #2.1 Save the csv to NAS switch folder
-write_csv(older_csv, "/Volumes/data/projects/switch/r_output/older_children_clean.csv")
+write_csv(older_csv, "/Volumes/data/projects/switch/r_outputs/clicking_analysis/child/older_children_clean.csv")
 
 #2.2. Check mean and range of participants' age
 mean_age <- mean(older_csv$age)
@@ -39,7 +39,7 @@ range_age <- range(older_csv$age)
 sd_age <- sd(older_csv$age)
 
 #3. Define output path and standard figure size
-output_dir <- "/Volumes/data/projects/switch/r_output"
+output_dir <- "/Volumes/data/projects/switch/r_outputs/clicking_analysis/child"
 
 #3.1 Create another csv with mean click to target instrument
 click_TI <- older_csv %>%
@@ -155,13 +155,13 @@ glmer_inst_training <- glmer(clickToTI ~ cueType_sum * testing_time_point + (1 |
 
 summary(glmer_inst_training)
 
-#                                 Estimate Std. Error z value Pr(>|z|)    
-# (Intercept)                     -2.55417    0.54777  -4.663 3.12e-06 ***
-# cueType_sum                     -0.37776    0.38979  -0.969    0.332    
-# testing_time_point1              0.03919    0.27452   0.143    0.886    
-# testing_time_point2              0.29601    0.27110   1.092    0.275    
-# cueType_sum:testing_time_point1  0.07839    0.54904   0.143    0.886    
-# cueType_sum:testing_time_point2  0.30705    0.54149   0.567    0.571     
+#                                  Estimate Std. Error z value Pr(>|z|)    
+# (Intercept)                     -2.412e+00  4.983e-01  -4.840  1.3e-06 ***
+# cueType_sum                     -4.983e-01  3.669e-01  -1.358    0.174    
+# testing_time_point1              1.445e-08  2.587e-01   0.000    1.000    
+# testing_time_point2              3.161e-01  2.547e-01   1.241    0.215    
+# cueType_sum:testing_time_point1  2.994e-07  5.175e-01   0.000    1.000    
+# cueType_sum:testing_time_point2  3.643e-01  5.088e-01   0.716    0.474   
 
 ## Calculate the BF value for testing_time_point2
 
@@ -204,13 +204,13 @@ glmer_mod_training <- glmer(clickToTA ~ testing_time_point * age_c + (1 | partic
 
 summary(glmer_mod_training)
 # 
-#                           Estimate Std. Error z value Pr(>|z|)    
-# (Intercept)                 4.4323     1.6644   2.663 0.007744 ** 
-# testing_time_point3         0.2006     0.3589   0.559 0.576102    
-# testing_time_point4         1.4995     0.3952   3.794 0.000148 ***
-# age_c                      -3.6430     2.5142  -1.449 0.147339    
-# testing_time_point3:age_c  -0.1836     0.8315  -0.221 0.825228    
-# testing_time_point4:age_c  -1.5548     0.8804  -1.766 0.077395 .  
+#                                  Estimate Std. Error z value Pr(>|z|)    
+# (Intercept)                     -2.412e+00  4.983e-01  -4.840  1.3e-06 ***
+# cueType_sum                     -4.983e-01  3.669e-01  -1.358    0.174    
+# testing_time_point1              1.445e-08  2.587e-01   0.000    1.000    
+# testing_time_point2              3.161e-01  2.547e-01   1.241    0.215    
+# cueType_sum:testing_time_point1  2.994e-07  5.175e-01   0.000    1.000    
+# cueType_sum:testing_time_point2  3.643e-01  5.088e-01   0.716    0.474 
 
 ################################################################################
 #8. the relationship between % click to Target Animal and change in click to Target Instrument 
