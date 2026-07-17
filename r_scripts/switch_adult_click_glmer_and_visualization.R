@@ -28,7 +28,7 @@ csv <- csv %>%
   rename(testing_time_point = phase)
 
 #2.1 Save the csv to NAS switch folder
-write_csv(csv, "/Volumes/data/projects/switch/r_outputs/adult_clean.csv")
+write_csv(csv, "/Volumes/data/projects/switch/r_outputs/clicking_analysis/adults/adult_clean.csv")
 
 #2.2. Check mean and range of participants' age
 mean_age <- mean(csv$age)
@@ -36,7 +36,7 @@ range_age <- range(csv$age)
 sd_age <- sd(csv$age)
 
 #3. Define output path and standard figure size
-output_dir <- "/Volumes/data/projects/switch/r_outputs"
+output_dir <- "/Volumes/data/projects/switch/r_outputs/clicking_analysis/adults"
 
 #3.1 Create another csv with mean click to target instrument
 click_TI <- csv %>%
